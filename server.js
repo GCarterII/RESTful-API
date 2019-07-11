@@ -7,7 +7,25 @@ var app = express();
 
 app.use(bodyParser.json());
 mongoose.connect('mongodb://localhost/tasks');
+app.use(express.static(__dirname + '/public/dist/public'));
 
+//
+// Helpers
+//
+
+function printHelper(data){
+    console.log('.');
+    console.log('..');
+    console.log('...');
+    console.log('....');
+    console.log('.....');
+    console.log(data);
+    console.log('.....');
+    console.log('....');
+    console.log('...');
+    console.log('..');
+    console.log('.');
+}
 
 
 //
@@ -22,7 +40,6 @@ var TaskSchema = new mongoose.Schema({
 });
 mongoose.model('Task', TaskSchema);
 var Task = mongoose.model('Task');
-
 
 //
 // Routing
@@ -48,7 +65,6 @@ app.get('/tasks', (req, res)=>{
         }
     })
 })
-
 
 app.post('/tasks', (req, res)=>{
     console.log(req)
